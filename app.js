@@ -1,9 +1,7 @@
-// function afterConnection() {
-//     connection.query('SELECT * FROM employee_tracker.role', function (err, res) {
-//         if (err) throw err;
-//         console.log(res)
-//     })
-// };
+async function test() {
+    const employee_roles = await query(`SELECT * FROM role`);
+    console.log(employee_roles)
 
-// afterConnection();
+}
 
+test();

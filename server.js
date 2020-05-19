@@ -40,39 +40,11 @@ async function query(command, values) {
     })
 }
 
-async function test() {
-    await query(`SELECT * FROM role`);
-    console.log(query())
-}
-
 connect();
-test();
 
-
-
-
-
-// Connection function
-// connection.connect(function (err) {
-//     if (err) throw err;
-//     console.log('connected as id ' + connection.threadId);
-// });
-
-// function afterConnection() {
-//     connection.query(command, function (err, res) {
-//         if (err) throw err;
-//     })
-// };
-
-// afterConnection();
-
-
-
-//connection.end();
-
-
-
+connection.end();
 
 // Questions
 // 1. Do you open a new server connection for every query?
+
 
