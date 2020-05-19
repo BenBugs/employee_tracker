@@ -1,24 +1,20 @@
 STAGE 1 - DISPLAY MENU OF OPTIONS
 
-When i see my options I may:
+When I see my options I may:
 
 View:
-    a. departments
-    b. roles
-    c. employees
+    a. All employees - will display a table of all employees
+    b. All Employees by Department - displays a table with employees for the chosen department
+    c. All Employees by Manager - display employess for that manager
 
 Add:
-    a. departments
-    b. roles
-    c. employees
+    a. Employee - go through a prompt cycle requesting all the relevant information from an array of questions
+
+Remove:
+    a. employee - dsiplay list of employees, chose one and validate iof that is the one to delete?
 
 Update:
-    a. employee roles
-    b. update employee manageer
+    a. employee roles - display list of all employees, select employee the option to updat role from drop down or new input
+    b. update employee manager
 
-Delete:
-    a. departments
-    b. roles
-    c. employees
-
-Exit program
+Exit program: 
