@@ -1,0 +1,24 @@
+STAGE 1 - DISPLAY MENU OF OPTIONS
+
+When i see my options I may:
+
+View:
+    a. departments
+    b. roles
+    c. employees
+
+Add:
+    a. departments
+    b. roles
+    c. employees
+
+Update:
+    a. employee roles
+    b. update employee manageer
+
+Delete:
+    a. departments
+    b. roles
+    c. employees
+
+Exit program
