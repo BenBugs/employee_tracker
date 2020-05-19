@@ -1,0 +1,24 @@
+1. Set up server page with routes - refer to mysql examples
+
+2. Create database with seed data - watch joins tutorials to understand how they work and when to create them
+
+3. Set up inquirer file with prompts as follows
+
+4. Write individual function to:
+
+Add:
+    a. departments
+    b. roles
+    c. employees
+
+View:
+    a. departments
+    b. roles
+    c. employees
+
+Update:
+    a. employees
+
+    * look at gif to check functionality
+
+5. learn about tabulating data in the CLI and find the right node module to do that 
