@@ -1,6 +1,5 @@
 const inquirer = require("inquirer");
 
-
 // STAGE 1 - DISPLAY MENU OF OPTIONS
 
 // When I see my options I may:
@@ -22,7 +21,6 @@ const inquirer = require("inquirer");
 
 // Exit program: 
 
-
 function mainMenu() {
     return inquirer
         .prompt([
@@ -42,28 +40,28 @@ async function mainMenuChoice() {
 
     switch (mainChoice) {
         case 'View all employees':
-            // function
+            viewAllEmployees()
             break;
         case 'View employees by department':
-            // function
+            viewAllEmployeesByDept()
             break;
         case 'View employees by manager':
-            // function
+            viewAllEmployeesByMgr()
             break;
         case 'Add employee':
-            // function
+            addEmployee()
             break;
         case 'Remove employee':
-            // function
+            removeEmployee()
             break;
         case 'Update employee role':
-            // function
+            updateEmployeeRole()
             break;
         case 'Update employee manager':
-            // function
+            updateEmployeeMgr()
             break;
         case 'Exit':
-            // function
+            exit()
             break;
     }
 }

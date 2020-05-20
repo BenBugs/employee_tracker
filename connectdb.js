@@ -1,5 +1,4 @@
 // Class to use when making database calls.
-const cTable = require('console.table');
 const mysql = require("mysql");
 
 class ConnectDB {
@@ -42,17 +41,5 @@ class ConnectDB {
         this.connection.end();
     }
 }
-
-// async function employeeTableTest() {
-//     const test = new ConnectDB()
-//     let newConnect = test.connect();
-//     let newQuery = await test.query(`SELECT * FROM employee INNER JOIN role INNER JOIN department`);
-//     console.table(newQuery);
-//     newConnect = test.end();
-// }
-
-// employeeTableTest()
-
-
 
 module.exports = ConnectDB;
