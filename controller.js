@@ -1,26 +1,10 @@
 const inquirer = require("inquirer");
+const Query = require('./model');
+const cTable = require('console.table');
 
-// STAGE 1 - DISPLAY MENU OF OPTIONS
 
-// When I see my options I may:
 
-// View:
-//     a. All employees - will display a table of all employees
-//     b. All Employees by Department - displays a table with employees for the chosen department
-//     c. All Employees by Manager - display employess for that manager
-
-// Add:
-//     a. Employee - go through a prompt cycle requesting all the relevant information from an array of questions
-
-// Remove:
-//     a. employee - dsiplay list of employees, chose one and validate iof that is the one to delete?
-
-// Update:
-//     a. employee roles - display list of all employees, select employee the option to update role from drop down or new input
-//     b. update employee manager
-
-// Exit program: 
-
+// Main use menu.
 function mainMenu() {
     return inquirer
         .prompt([
@@ -33,14 +17,18 @@ function mainMenu() {
         ]);
 }
 
+const newQueryObj = new Query();
 
+
+// Event handler function
 async function mainMenuChoice() {
     const mainResponse = await mainMenu(); // Get user's main menu choice and store this object in mainResponse.
     const mainChoice = mainResponse['choice']; // Let mainChoice equal user choice value 'string'
 
+
     switch (mainChoice) {
         case 'View all employees':
-            viewAllEmployees()
+            newQueryObj.viewAllEmployees();
             break;
         case 'View employees by department':
             viewAllEmployeesByDept()
@@ -69,7 +57,23 @@ async function mainMenuChoice() {
 mainMenuChoice()
 
 
+// STAGE 1 - DISPLAY MENU OF OPTIONS
 
+// When I see my options I may:
 
+// View:
+//     a. All employees - will display a table of all employees
+//     b. All Employees by Department - displays a table with employees for the chosen department
+//     c. All Employees by Manager - display employess for that manager
 
+// Add:
+//     a. Employee - go through a prompt cycle requesting all the relevant information from an array of questions
 
+// Remove:
+//     a. employee - dsiplay list of employees, chose one and validate iof that is the one to delete?
+
+// Update:
+//     a. employee roles - display list of all employees, select employee the option to update role from drop down or new input
+//     b. update employee manager
+
+// Exit program: 

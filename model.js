@@ -1,6 +1,7 @@
-// Class to use when making database calls.
 const mysql = require("mysql");
 
+
+// Database connection.
 class ConnectDB {
     constructor() {
 
@@ -43,3 +44,46 @@ class ConnectDB {
 }
 
 module.exports = ConnectDB;
+
+
+// Open server connection
+const openConnection = new ConnectDB();
+openConnection.connect();
+
+
+// Query class
+class Query {
+    constructor() {}
+
+    async viewAllEmployees() {
+        const newQuery = await openConnection.query(`SELECT * FROM employee INNER JOIN role INNER JOIN department`);
+        return console.table(newQuery);
+    }
+    async viewAllEmployeesByDept() {
+        const newQuery = await this.openConnection.query(`SELECT name FROM department INNER JOIN employee`);
+        return console.table(newQuery);
+    }
+    async viewAllEmployeesByMgr() {
+        const newQuery = await this.openConnection.query(``);
+        console.table(newQuery);
+    }
+    async addEmployee() {
+
+    }
+    async removeEmployee() {
+
+    }
+    async updateEmployeeRole() {
+
+    }
+    async updateEmployeeMgr() {
+
+    }
+    endConnection() {
+        const openConnection = new ConnectDB()
+        openConnection.end(); // closes database connection after every query
+    }
+
+}
+
+module.exports = Query;
