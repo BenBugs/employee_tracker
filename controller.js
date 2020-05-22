@@ -37,14 +37,8 @@ async function mainMenuChoice() {
             // Launches new inquirer sequence chooseEmployeesByDepartment()
             const deptsArr = await newQueryObj.getDepts();
             const departmentResponse = await chooseEmployeesByDepartment(deptsArr);
-
-            // const department = departmentResponse['choice'];
-            // await newQueryObj.viewAllEmployeesByDept(department);
-
-
-
-
-
+            const department = departmentResponse['choice'];
+            await newQueryObj.viewAllEmployeesByDept(department);
             mainMenuChoice();
             break;
 
