@@ -53,8 +53,9 @@ openConnection.connect();
 
 // Query class
 class Query {
-    constructor() { }
+    constructor() {}
 
+// Outputs all employees + title + salary + department.
     async viewAllEmployees() {
         const newQuery = await openConnection.query(
         `SELECT employee_id, first_name, last_name, title, salary, department.name
@@ -64,6 +65,17 @@ class Query {
         ORDER BY role.salary DESC`);
         return console.table(newQuery);
     }
+
+    // Reads departments to form a list
+    async getDepts() { 
+        const deptsObj = await openConnection.query(
+        `SELECT name FROM department`);
+        const deptsArr = [];
+        await deptsObj.forEach(({ name }) => deptsArr.push(name));
+        return deptsArr;
+    }
+
+    // Gets employe name + title + salary BY department.
     async viewAllEmployeesByDept(value) { 
         const department = value;
         const newQuery = await openConnection.query(
@@ -74,6 +86,7 @@ class Query {
         WHERE department.name = ?`, [department]);
         return console.table(newQuery);
     }
+
     async viewAllEmployeesByMgr() {
         const newQuery = await openConnection.query(``);
         console.table(newQuery);

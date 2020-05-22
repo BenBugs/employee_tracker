@@ -17,6 +17,10 @@ function mainMenu() {
 }
 
 
+// const deptsArr = [];
+// deptsObj.forEach(({ name }) => deptsArr.push(name));
+
+
 // Event handler function.
 async function mainMenuChoice() {
     const mainResponse = await mainMenu(); // Get user's main menu choice and store this object in mainResponse.
@@ -28,28 +32,42 @@ async function mainMenuChoice() {
             await newQueryObj.viewAllEmployees();
             mainMenuChoice();
             break;
+
         case 'View employees by department':
             // Launches new inquirer sequence chooseEmployeesByDepartment()
-            const departmentResponse = await chooseEmployeesByDepartment();
-            const department = departmentResponse['choice'];
-            await newQueryObj.viewAllEmployeesByDept(department);
+            const deptsArr = await newQueryObj.getDepts();
+            const departmentResponse = await chooseEmployeesByDepartment(deptsArr);
+
+            // const department = departmentResponse['choice'];
+            // await newQueryObj.viewAllEmployeesByDept(department);
+
+
+
+
+
             mainMenuChoice();
             break;
+
         case 'View employees by manager':
             newQueryObj.viewAllEmployeesByMgr();
             break;
+
         case 'Add employee':
             newQueryObj.addEmployee();
             break;
+
         case 'Remove employee':
             newQueryObj.removeEmployee();
             break;
+
         case 'Update employee role':
             newQueryObj.updateEmployeeRole();
             break;
+
         case 'Update employee manager':
             newQueryObj.updateEmployeeMgr();
             break;
+
         case 'Exit':
             newQueryObj.exit();
             break;
@@ -60,14 +78,14 @@ mainMenuChoice()
 
 
 // Event handles department choice.
-function chooseEmployeesByDepartment() {
+function chooseEmployeesByDepartment(currentChoices) {
     return inquirer
         .prompt([
             {
                 type: 'list',
                 name: 'choice',
                 message: 'Which department?',
-                choices: ['Management', 'Finance', 'Human Resources', 'Operations', 'Sales', 'Account Management', 'IT', 'Exit'],
+                choices: currentChoices,
             }
         ]);
 }
