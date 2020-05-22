@@ -11,7 +11,7 @@ function mainMenu() {
                 type: 'list',
                 name: 'choice',
                 message: 'What would you like to do?',
-                choices: ['View all employees', 'View employees by department', 'View employees by manager', 'Add employee', 'Remove employee', 'Update employee role', 'Update employee manager', 'Exit'],
+                choices: ['View all employees', 'View employees by department', 'Add employee', 'Update employee role', 'Exit']
             }
         ]);
 }
@@ -42,24 +42,18 @@ async function mainMenuChoice() {
             mainMenuChoice();
             break;
 
-        case 'View employees by manager':
-            newQueryObj.viewAllEmployeesByMgr();
-            break;
-
         case 'Add employee':
-            newQueryObj.addEmployee();
-            break;
+            const getEmployeeRoles = await newQueryObj.getEmployeeRoles();
+            const getManagers = await newQueryObj.getManagers();
+            console.log(getManagers)
+            // const employeeMenu = await getEmployee(getEmployeeRoles, getManagers);
 
-        case 'Remove employee':
-            newQueryObj.removeEmployee();
+
+            newQueryObj.addEmployee();
             break;
 
         case 'Update employee role':
             newQueryObj.updateEmployeeRole();
-            break;
-
-        case 'Update employee manager':
-            newQueryObj.updateEmployeeMgr();
             break;
 
         case 'Exit':
@@ -84,3 +78,40 @@ function chooseEmployeesByDepartment(currentChoices) {
         ]);
 }
 
+
+// Add employee.
+function getEmployee(roles, managers) {
+
+    let questions = [
+        {
+            type: 'input',
+            name: 'choice',
+            message: 'Employee first name',
+        },
+        {
+            type: 'input',
+            name: 'choice',
+            message: 'Employee last name',
+        },
+        {
+            type: 'list',
+            name: 'choice',
+            message: 'What role will they pretend to do?',
+            choices: roles,
+        },
+        {
+            type: 'input',
+            name: 'choice',
+            message: 'How much will this walking disaster cost us?',
+        },
+        {
+            type: 'list',
+            name: 'choice',
+            message: 'Who will manage the FNG?',
+            choices: managers,
+        }
+    ];
+
+    return inquirer.prompt(questions); // inquirer.prompt asks the q's and returns the answers to the promise
+
+}
