@@ -47,7 +47,9 @@ async function mainMenuChoice() {
             break;
 
         case 'Update employee role':
-            newQueryObj.updateEmployeeRole();
+            const employeeNames = await newQueryObj.getEmployees();
+            const updateRole = getRoles(employeeNames, getEmployeeRoles);
+            await newQueryObj.updateEmployeeRole(updateRole);
             break;
 
         case 'Exit':
@@ -104,6 +106,29 @@ function getEmployee(roles, managers) {
             message: 'Who will manage the new guy?',
             choices: managers,
         }
+    ];
+
+    return inquirer.prompt(questions);
+};
+
+
+// Add employee role update.
+function getRoles(employees, roles) {
+
+    let questions = [
+        {
+            type: 'list',
+            name: 'employees',
+            message: 'Which employee\'s role would you like to update?',
+            choices: employees,
+        },
+        {
+            type: 'list',
+            name: 'roles',
+            message: 'What is their new role?',
+            choices: roles,
+        }
+
     ];
 
     return inquirer.prompt(questions);

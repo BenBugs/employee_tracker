@@ -125,19 +125,25 @@ class Query {
     }
 
 
+    async getEmployees() {
+        const getEmployees = await openConnection.query(
+        `SELECT employee_id, first_name, last_name, FROM employee`
+        )
+        return getEmployees;
+    }
+
+
     async updateEmployeeRole(roleMenu) {
-        `SELECT first_name, last_name, title, role.role_id
-        FROM employee
+        `SELECT first_name, last_name, title, role.role_id FROM employee
         INNER JOIN role
         ON employee.role_id = role.role_id`
         const queryString = `UPDATE role SET (title) VALUES (?) WHERE role_id = ?`
         const addNewEmployee = await openConnection.query(queryString, [
             roleMenu['title'],
-            roleMenu['role']
-        ])
+        ] , roleMenu['role'])  // its broken here????????????????????????????????????
     }
 
-    
+
     endConnection() {
         const openConnection = new ConnectDB()
         openConnection.end(); // closes database connection after every query
