@@ -1,4 +1,4 @@
-const inquirer = require("inquirer");
+const inquirer = require('inquirer');
 const Query = require('./model');
 const cTable = require('console.table');
 
@@ -12,19 +12,15 @@ function mainMenu() {
                 name: 'choice',
                 message: 'What would you like to do?',
                 choices: ['View all employees', 'View employees by department', 'Add employee', 'Update employee role', 'Exit']
-            }
+            },
         ]);
 }
 
 
-// const deptsArr = [];
-// deptsObj.forEach(({ name }) => deptsArr.push(name));
-
-
 // Event handler function.
 async function mainMenuChoice() {
-    const mainResponse = await mainMenu(); // Get user's main menu choice and store this object in mainResponse.
-    const mainChoice = mainResponse['choice']; // Let mainChoice equal user choice value 'string'
+    const { choice } = await mainMenu(); // Get user's main menu choice and store this object in mainResponse.
+    const mainChoice = choice; // Let mainChoice equal user choice value 'string'
     const newQueryObj = new Query();
 
     switch (mainChoice) {
@@ -45,11 +41,9 @@ async function mainMenuChoice() {
         case 'Add employee':
             const getEmployeeRoles = await newQueryObj.getEmployeeRoles();
             const getManagers = await newQueryObj.getManagers();
-            console.log(getManagers)
-            // const employeeMenu = await getEmployee(getEmployeeRoles, getManagers);
-
-
-            newQueryObj.addEmployee();
+            const employeeMenu = await getEmployee(getEmployeeRoles, getManagers);
+            // Up to here
+            newQueryObj.addEmployee(employeeMenu);
             break;
 
         case 'Update employee role':
@@ -57,12 +51,12 @@ async function mainMenuChoice() {
             break;
 
         case 'Exit':
-            newQueryObj.exit();
+            newQueryObj.endConnection();
             break;
     }
-}
+};
 
-mainMenuChoice()
+mainMenuChoice();
 
 
 // Event handles department choice.
@@ -76,7 +70,7 @@ function chooseEmployeesByDepartment(currentChoices) {
                 choices: currentChoices,
             }
         ]);
-}
+};
 
 
 // Add employee.
@@ -85,33 +79,32 @@ function getEmployee(roles, managers) {
     let questions = [
         {
             type: 'input',
-            name: 'choice',
+            name: 'first_name',
             message: 'Employee first name',
         },
         {
             type: 'input',
-            name: 'choice',
+            name: 'last_name',
             message: 'Employee last name',
         },
         {
             type: 'list',
-            name: 'choice',
+            name: 'role',
             message: 'What role will they pretend to do?',
             choices: roles,
         },
         {
             type: 'input',
-            name: 'choice',
+            name: 'salary',
             message: 'How much will this walking disaster cost us?',
         },
         {
             type: 'list',
-            name: 'choice',
-            message: 'Who will manage the FNG?',
+            name: 'manager',
+            message: 'Who will manage the new guy?',
             choices: managers,
         }
     ];
 
-    return inquirer.prompt(questions); // inquirer.prompt asks the q's and returns the answers to the promise
-
-}
+    return inquirer.prompt(questions);
+};

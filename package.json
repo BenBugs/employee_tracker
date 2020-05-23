@@ -21,6 +21,7 @@
     "console.table": "^0.10.0",
     "ctable": "0.0.3",
     "express": "^4.17.1",
-    "inquirer": "^7.1.0"
+    "inquirer": "^7.1.0",
+    "prompt": "^1.0.0"
   }
 }
