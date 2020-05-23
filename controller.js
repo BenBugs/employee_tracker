@@ -41,9 +41,11 @@ async function mainMenuChoice() {
         case 'Add employee':
             const getEmployeeRoles = await newQueryObj.getEmployeeRoles();
             const getManagers = await newQueryObj.getManagers();
+            console.log(getManagers)
             const employeeMenu = await getEmployee(getEmployeeRoles, getManagers);
-            // Up to here
+            console.log(employeeMenu)
             newQueryObj.addEmployee(employeeMenu);
+            mainMenuChoice();
             break;
 
         case 'Update employee role':
@@ -92,13 +94,13 @@ function getEmployee(roles, managers) {
         {
             type: 'list',
             name: 'role',
-            message: 'What role will they pretend to do?',
+            message: 'What\'s their role?',
             choices: roles,
         },
         {
             type: 'input',
             name: 'salary',
-            message: 'How much will this walking disaster cost us?',
+            message: 'What is their salary?',
         },
         {
             type: 'list',
