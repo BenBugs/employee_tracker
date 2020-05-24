@@ -41,9 +41,7 @@ async function mainMenuChoice() {
         case 'Add employee':
             const getEmployeeRoles = await newQueryObj.getEmployeeRoles();
             const getManagers = await newQueryObj.getManagers();
-            console.log(getManagers)
             const employeeMenu = await getEmployee(getEmployeeRoles, getManagers);
-            console.log(employeeMenu)
             newQueryObj.addEmployee(employeeMenu);
             mainMenuChoice();
             break;
@@ -53,8 +51,8 @@ async function mainMenuChoice() {
             const updateEmployeeRoles = await newQueryObj.getEmployeeRoles();
             const updateRole = await getRoles(employeeNames, updateEmployeeRoles);
             console.log(updateRole)
-            // console.log('updateEmployeeRoles' + updateEmployeeRoles)
-            // await newQueryObj.updateEmployeeRole(updateEmployeeRoles, updateRole);
+            await newQueryObj.updateEmployeeRole(updateRole);
+            mainMenuChoice();
             break;
 
         case 'Exit':
@@ -119,9 +117,6 @@ function getEmployee(roles, managers) {
 
 // Add employee role update.
 function getRoles(employees, roles) {
-
-    console.log(employees)
-    console.log(roles)
 
     let questions = [
         {

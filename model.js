@@ -58,7 +58,7 @@ class Query {
     // Outputs all employees + title + salary + department.
     async viewAllEmployees() {
         const newQuery = await openConnection.query(
-        `SELECT employee_id, first_name, last_name, title, salary, department.department_name
+            `SELECT employee_id, first_name, last_name, title, salary, department.department_name
         FROM employee
         INNER JOIN role ON employee.role_id = role.role_id
         INNER JOIN department ON role.role_id = department.department_id
@@ -70,7 +70,7 @@ class Query {
     // Reads departments to form a list
     async getDepts() {
         const deptsObj = await openConnection.query(
-        `SELECT department_name FROM department`);
+            `SELECT department_name FROM department`);
         const deptsArr = [];
         await deptsObj.forEach(({ department_name: department_name }) => deptsArr.push(department_name));
         return deptsArr;
@@ -81,7 +81,7 @@ class Query {
     async viewAllEmployeesByDept(value) {
         const department = value;
         const newQuery = await openConnection.query(
-        `SELECT employee_id, first_name, last_name, title, salary, department.department_name FROM employee
+            `SELECT employee_id, first_name, last_name, title, salary, department.department_name FROM employee
         INNER JOIN role ON employee.role_id = role.role_id
         INNER JOIN department ON role.role_id = department.department_id
         WHERE department.department_name = ?`, [department]);
@@ -91,27 +91,26 @@ class Query {
 
     async getEmployeeRoles() {
         const rolesObj = await openConnection.query(
-        `SELECT role_id, title FROM role`);
+            `SELECT role_id, title FROM role`);
         const rolesArr = [];
         await rolesObj.forEach(({ role_id, title }) => rolesArr.push({
             value: role_id,
             name: title
         }));
-        // console.log(rolesArr)
         return rolesArr;
     }
 
 
     async getManagers() {
         const mgrsObj = await openConnection.query(
-        `SELECT employee_id, first_name, last_name, title, role.role_id
+            `SELECT employee_id, first_name, last_name, title, role.role_id
         FROM employee
         INNER JOIN role
         ON employee.role_id = role.role_id
         ORDER BY role.role_id ASC`);
         const mgrsArr = [];
-        await mgrsObj.forEach(({ employee_id, first_name, last_name, title }) => mgrsArr.push({ 
-            value: employee_id, 
+        await mgrsObj.forEach(({ employee_id, first_name, last_name, title }) => mgrsArr.push({
+            value: employee_id,
             name: first_name + ' ' + last_name + ' ' + '-' + ' ' + title
         }));
         return mgrsArr;
@@ -129,30 +128,31 @@ class Query {
     }
 
 
-    async getEmployees() { 
+    async getEmployees() {
         const currentRole = `SELECT employee_id, first_name, last_name FROM employee`;
         const employeesObj = await openConnection.query(currentRole);
-            const employeesArr = [];
-            await employeesObj.forEach(({ employee_id, first_name, last_name, }) => employeesArr.push({
-                value: employee_id,
-                name: first_name + ' ' + last_name
-            }));
-            // console.log(employeesArr)
+        const employeesArr = [];
+        await employeesObj.forEach(({ employee_id, first_name, last_name, }) => employeesArr.push({
+            value: employee_id,
+            name: first_name + ' ' + last_name
+        }));
         return employeesArr;
     }
 
 
-    async updateEmployeeRole(updateEmployeeRoles, updateRole) {
-        const queryString = `UPDATE employee_id SET (title) VALUES (?) WHERE role_id = ?`
+    async updateEmployeeRole(updateRole) {
+        const userId = updateRole['employees'];
+        const newRoleId = updateRole['roles'];
+        console.log(userId,newRoleId)
+        const queryString = `UPDATE employee SET ?  WHERE ?`
         const addNewEmployee = await openConnection.query(queryString, [
-            updatedEmployeeRoles['title'],
-        ] , roleMenu['role']) 
+            {role_id: newRoleId}, { employee_id: userId }
+        ])
     }
-
 
     endConnection() {
         const openConnection = new ConnectDB()
-        console.log('Thank you for using Employee Tracker')
+        console.log('Thank you for using Employee Tracker - it nearly killed me to build this bloody thing :)')
         openConnection.end() // closes database connection after every query
     }
 }
