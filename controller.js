@@ -50,7 +50,6 @@ async function mainMenuChoice() {
             const employeeNames = await newQueryObj.getEmployees();
             const updateEmployeeRoles = await newQueryObj.getEmployeeRoles();
             const updateRole = await getRoles(employeeNames, updateEmployeeRoles);
-            console.log(updateRole)
             await newQueryObj.updateEmployeeRole(updateRole);
             mainMenuChoice();
             break;
