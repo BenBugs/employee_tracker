@@ -97,11 +97,11 @@ function getEmployee(roles, managers) {
             message: 'What\'s their role?',
             choices: roles,
         },
-        {
-            type: 'input',
-            name: 'salary',
-            message: 'What is their salary?',
-        },
+        // {
+        //     type: 'input',
+        //     name: 'salary',
+        //     message: 'What is their salary?',
+        // },
         {
             type: 'list',
             name: 'manager',

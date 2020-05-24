@@ -58,7 +58,7 @@ class Query {
     // Outputs all employees + title + salary + department.
     async viewAllEmployees() {
         const newQuery = await openConnection.query(
-            `SELECT employee_id, first_name, last_name, title, salary, department.department_name
+        `SELECT employee_id, first_name, last_name, title, salary, department.department_name
         FROM employee
         INNER JOIN role ON employee.role_id = role.role_id
         INNER JOIN department ON role.role_id = department.department_id
@@ -70,7 +70,7 @@ class Query {
     // Reads departments to form a list
     async getDepts() {
         const deptsObj = await openConnection.query(
-            `SELECT department_name FROM department`);
+        `SELECT department_name FROM department`);
         const deptsArr = [];
         await deptsObj.forEach(({ department_name: department_name }) => deptsArr.push(department_name));
         return deptsArr;
@@ -81,7 +81,7 @@ class Query {
     async viewAllEmployeesByDept(value) {
         const department = value;
         const newQuery = await openConnection.query(
-            `SELECT employee_id, first_name, last_name, title, salary, department.department_name FROM employee
+        `SELECT employee_id, first_name, last_name, title, salary, department.department_name FROM employee
         INNER JOIN role ON employee.role_id = role.role_id
         INNER JOIN department ON role.role_id = department.department_id
         WHERE department.department_name = ?`, [department]);
@@ -103,7 +103,7 @@ class Query {
 
     async getManagers() {
         const mgrsObj = await openConnection.query(
-            `SELECT employee_id, first_name, last_name, title, role.role_id
+        `SELECT employee_id, first_name, last_name, title, role.role_id
         FROM employee
         INNER JOIN role
         ON employee.role_id = role.role_id
@@ -125,6 +125,7 @@ class Query {
             employeeMenu['role'],
             employeeMenu['manager']
         ])
+        // const queryString = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)`
     }
 
 
