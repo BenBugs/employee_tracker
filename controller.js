@@ -50,8 +50,11 @@ async function mainMenuChoice() {
 
         case 'Update employee role':
             const employeeNames = await newQueryObj.getEmployees();
-            const updateRole = getRoles(employeeNames, getEmployeeRoles);
-            await newQueryObj.updateEmployeeRole(updateRole);
+            const updateEmployeeRoles = await newQueryObj.getEmployeeRoles();
+            const updateRole = await getRoles(employeeNames, updateEmployeeRoles);
+            console.log(updateRole)
+            // console.log('updateEmployeeRoles' + updateEmployeeRoles)
+            // await newQueryObj.updateEmployeeRole(updateEmployeeRoles, updateRole);
             break;
 
         case 'Exit':
@@ -117,18 +120,21 @@ function getEmployee(roles, managers) {
 // Add employee role update.
 function getRoles(employees, roles) {
 
+    console.log(employees)
+    console.log(roles)
+
     let questions = [
         {
             type: 'list',
             name: 'employees',
             message: 'Which employee\'s role would you like to update?',
-            choices: employees,
+            choices: employees
         },
         {
             type: 'list',
             name: 'roles',
             message: 'What is their new role?',
-            choices: roles,
+            choices: roles
         }
 
     ];

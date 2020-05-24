@@ -114,7 +114,6 @@ class Query {
             value: employee_id, 
             name: first_name + ' ' + last_name + ' ' + '-' + ' ' + title
         }));
-        // console.log(mgrsArr)
         return mgrsArr;
     }
 
@@ -130,20 +129,24 @@ class Query {
     }
 
 
-    async getEmployees() {
-        const getEmployees = await openConnection.query(
-        `SELECT employee_id, first_name, last_name, FROM employee`
-        )
-        return getEmployees;
+    async getEmployees() { 
+        const currentRole = `SELECT employee_id, first_name, last_name FROM employee`;
+        const employeesObj = await openConnection.query(currentRole);
+            const employeesArr = [];
+            await employeesObj.forEach(({ employee_id, first_name, last_name, }) => employeesArr.push({
+                value: employee_id,
+                name: first_name + ' ' + last_name
+            }));
+            // console.log(employeesArr)
+        return employeesArr;
     }
 
 
-    async updateEmployeeRole(roleMenu) {
-        
-        const queryString = `UPDATE role SET (title) VALUES (?) WHERE role_id = ?`
+    async updateEmployeeRole(updateEmployeeRoles, updateRole) {
+        const queryString = `UPDATE employee_id SET (title) VALUES (?) WHERE role_id = ?`
         const addNewEmployee = await openConnection.query(queryString, [
-            roleMenu['title'],
-        ] , roleMenu['role'])  // its broken here????????????????????????????????????
+            updatedEmployeeRoles['title'],
+        ] , roleMenu['role']) 
     }
 
 
