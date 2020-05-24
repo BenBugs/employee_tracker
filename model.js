@@ -143,7 +143,6 @@ class Query {
     async updateEmployeeRole(updateRole) {
         const userId = updateRole['employees'];
         const newRoleId = updateRole['roles'];
-        console.log(userId,newRoleId)
         const queryString = `UPDATE employee SET ?  WHERE ?`
         const addNewEmployee = await openConnection.query(queryString, [
             {role_id: newRoleId}, { employee_id: userId }
