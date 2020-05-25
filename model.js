@@ -61,7 +61,7 @@ class Query {
         `SELECT employee_id, first_name, last_name, title, salary, department.department_name
         FROM employee
         INNER JOIN role ON employee.role_id = role.role_id
-        INNER JOIN department ON role.role_id = department.department_id
+        INNER JOIN department ON role.department_id = department.department_id
         ORDER BY role.salary DESC`);
         return console.table(newQuery);
     }
