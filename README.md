@@ -38,4 +38,4 @@ The project contains three tables:
 
 * Inquirer.js
 
-* Console.table
+* Console table
